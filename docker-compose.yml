@@ -1,0 +1,44 @@
+version: '3'
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    command: >
+      sh -c "until nc -z db 3306; do echo 'Aguardando o MySQL...'; sleep 2; done &&
+      php artisan migrate &&
+      php artisan test &&
+      php artisan serve --host=0.0.0.0 --port=8000"
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8000:8000"
+    networks:
+      - laravel-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  db:
+    image: mysql:5.7
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: deep
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306" # Exponha o MySQL na porta 3307
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - laravel-network
+
+networks:
+  laravel-network:
+    driver: bridge
+
+volumes:
+  db_data:
