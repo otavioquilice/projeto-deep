@@ -26,6 +26,8 @@ Ou para rodar em segundo plano (modo detached):
 docker compose up -d
 ```
 
+3. Após o start dos container, acessar: http://127.0.0.1:8000/
+
 
 ## ⚙️ Configurações do ambiente
 O serviço MySQL está exposto na porta 3307 da máquina HOST caso queira se conectar através de uma ferramenta (GUI) para modelagem, desenvolvimento e administração de bancos de dados MySQL
