@@ -65,7 +65,8 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            {{-- <x-primary-button>{{ __('Save') }}</x-primary-button> --}}
+            <x-primary-button id="submit-profile">{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p
@@ -79,3 +80,24 @@
         </div>
     </form>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.getElementById('submit-profile').addEventListener('click', function (e) {
+    e.preventDefault(); // Impede envio automático
+
+    Swal.fire({
+        title: 'Salvar alterações?',
+        text: 'Tem certeza de que deseja atualizar seu perfil?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, salvar!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            this.closest('form').submit(); // Envia o formulário
+        }
+    });
+});
+</script>
+
