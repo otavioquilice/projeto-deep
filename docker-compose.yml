@@ -11,6 +11,7 @@ services:
       sh -c "until nc -z db 3306; do echo 'Aguardando o MySQL...'; sleep 2; done &&
       php artisan migrate &&
       php artisan test &&
+      php artisan storage:link &&
       php artisan serve --host=0.0.0.0 --port=8000"
     volumes:
       - .:/var/www/html
