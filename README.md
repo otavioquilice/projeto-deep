@@ -43,3 +43,4 @@ O arquivo .env está commitado intencionalmente, exclusivamente para facilitar o
 8. JavaScript: Modal sweetalert
 9. Upload de imagem de perfil com armazenamento local e exibição no dashboard e edição do perfil.
 10. Docker para containers Laravel e SGBD MySql
+11. Login + Logout + Registro de usuário
